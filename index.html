@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="description" content="Portofolio Page for Septian Puji">
     <meta property="og:title" content="Septi | Portofolio" />
@@ -14,8 +15,46 @@
 
 
     <link rel="stylesheet" href="assets/css/style.min.css">
+
+    <style>
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .mapouter {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;
+        }
+
+        .gmap_canvas {
+            overflow: hidden;
+            background: none !important;
+            height: 500px;
+            width: 600px;
+            border: 2px solid;
+            border-radius: 30px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Coming Soon</h1>
+    <div class="container">
+    <h1 style="text-align: center;" class="mb-4">Coming Soon</h1>
+
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe width="600px" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=puri%20indah%20financial%20tower&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    scrolling="no" marginheight="0" marginwidth="0"></iframe>
+
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
