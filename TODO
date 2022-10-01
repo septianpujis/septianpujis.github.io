@@ -1,2 +1,0 @@
-ganti lang button jadi switcher, jadi ga white loading ketika ganti bahasa
-sistem bahasa ganti pake js (diparse, diswitch pake true false, textnya ganti dari php ke id di masing2 tag / ganti attirbut pake setAttribute)

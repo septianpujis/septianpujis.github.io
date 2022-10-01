@@ -18,7 +18,6 @@
     "good_4_title" : "Full Stack",
     "good_4_text" : "Front End (HTML, CSS, JS), Back End (Java, PHP, Python, Database DDL / DML)",
     "contact_me" : "You have any question about me? Send it directly here. (It's work)",
-    "btn_send" : "Send Message",
     "timeline_year_1" : "Oct 2019",
     "timeline_year_2" : "Feb 2020",
     "timeline_year_3" : "Feb 2021",
@@ -30,6 +29,11 @@
     "timeline_info_4" : "Start contract work at PT. Evotech Distribusi",
     "timeline_info_5" : "Finished contract work at PT. Evotech Distribusi",
     "project_1_text" : "Digital Library System. <br> Built using Outsystems app, Low-Code Development Platform for web/mobile<br>For live demo, click the following <a href='https://personal-i6nfgh8p.outsystemscloud.com/SiPusDi/' target='_blank'>link</a>",
-    "project_2_text" : "Library Management System Website Development Programming Exercise with Laravel 8 Framework (PHP).<br/>Database Diagram, Usecase Diagram, and Business Rule attached to the following Link:<a href='bit.ly/SipusdiRequirement'>Document LMS</a>",
-    "project_3_text" : "Golang Programming Exercise. Creating a Mailing Systems Panel Website for this portfolio page."
+    "project_2_text" : "Library Management System Website Development Programming Exercise with Laravel 8 Framework (PHP).<br/>Database Diagram, Usecase Diagram, and Business Rule attached to the following Link: <a href='bit.ly/SipusdiRequirement'>Document LMS</a>",
+    "project_3_text" : "Golang Programming Exercise. Creating a Mailing Systems Panel Website for this portfolio page.",
+    "btn_send" : "Send Message",
+    "input_name_placeholder" : "Your Name...",
+    "input_email_placeholder" : "Your Email...",
+    "input_subject_placeholder" : "Your Subject...",
+    "input_message_placeholder" : "Your Message..."
 }

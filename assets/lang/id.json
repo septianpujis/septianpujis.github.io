@@ -31,5 +31,9 @@
     "timeline_info_5" : "Selesai Kerja di PT. Evotech Distribusi",
     "project_1_text" : "Sistem Perpustakaan Digital. <br> Dibangun menggunakan aplikasi Outsystems, Low-Code Development Platform for web/mobile<br>Untuk live demo, klik <a href='https://personal-i6nfgh8p.outsystemscloud.com/SiPusDi/' target='_blank'>Link Berikut</a>",
     "project_2_text" : "Latihan Pemrograman pembuatan Website Sistem Perpustakaan dengan Framework Laravel 8 (PHP).<br/>Diagram Database, Diagram Usecase, dan Bisnis Rule terlampir pada dokumen berikut: <a href='bit.ly/SipusdiRequirement'>Dokumen Requirement</a>",
-    "project_3_text" : "Latihan Pemrograman Golang <br>Pembuatan Website Panel Mailing Systems untuk halaman portofolio ini."
+    "project_3_text" : "Latihan Pemrograman Golang <br>Pembuatan Website Panel Mailing Systems untuk halaman portofolio ini.",
+    "input_name_placeholder" : "Nama...",
+    "input_email_placeholder" : "Email...",
+    "input_subject_placeholder" : "Judul...",
+    "input_message_placeholder" : "Pesan..."
 }
