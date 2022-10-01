@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="Portofolio Page for Septian Puji">
+    <meta property="og:title" content="Septi | Portofolio" />
+    <meta property="og:description" content="Portofolio Page for Septian Puji" />
+    <meta property="og:url" content="//septianpujis.github.io" />
+    <meta property="og:image" content="assets/images/metaImage.png" />
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Septi</title>
+
+    <!-- <link rel="stylesheet" href="assets/css/style.min.css"> -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <style>
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .mapouter {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;
+        }
+
+        .gmap_canvas {
+            overflow: hidden;
+            background: none !important;
+            height: 500px;
+            width: 600px;
+            border: 2px solid;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        var obj;
+        function setLang(lang) {
+            var url = lang == "en" ? "./assets/lang/en.json" : "./assets/lang/id.json";
+
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myArr = JSON.parse(this.responseText);
+                    getLang(myArr)
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+
+            function getLang(arr) {
+                obj = arr;
+                console.log(obj.about);
+            }
+        }
+
+        setLang("en")
+    </script>
+
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('id')">ID</button>
+
+
+    <div class="container">
+        <h1 style="text-align: center;" class="mb-4">Coming Soon</h1>
+
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe width="600px" height="500" id="gmap_canvas"
+                    src="https://maps.google.com/maps?q=puri%20indah%20financial%20tower&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
