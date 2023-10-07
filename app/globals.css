@@ -2,18 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "font.css";
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
 }
 
 body {
@@ -24,4 +18,19 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-sans;
+}
+
+p,
+span,
+a {
+  @apply font-serif;
 }
