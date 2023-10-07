@@ -17,6 +17,13 @@ module.exports = {
       sans: ["Gabarito"],
       serif: ["Taviraj"],
     },
+    colors: {
+      transparent: "transparent",
+      primary: "#b8621b",
+      secondary: "#262a56",
+      background: "#f7ede0",
+      neutral: "#000000",
+    },
   },
   plugins: [],
 };
