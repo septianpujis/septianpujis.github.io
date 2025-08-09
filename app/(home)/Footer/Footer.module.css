@@ -1,0 +1,19 @@
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+}
+
+.footer-menu {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-menu li {
+  width: calc(100% / 4);
+  margin: 10px 0;
+}

@@ -26,12 +26,24 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-sans;
+  @apply font-serif;
 }
 
 p,
 span,
 a,
 li {
-  @apply font-serif;
+  @apply font-sans;
+}
+
+.container {
+  margin: auto;
+}
+
+section {
+  padding: 120px 0;
+}
+
+section:first-of-type {
+  padding: 0;
 }

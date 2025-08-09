@@ -15,8 +15,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ["Gabarito"],
-      serif: ["Taviraj"],
+      sans: ["Playfair Display"],
+      serif: ["Outfit"],
     },
     colors: {
       transparent: "transparent",
