@@ -241,8 +241,8 @@ h6 {
 .section-heading {
   float: left;
   width: 100%;
-  padding-bottom: 50px;
-  margin-bottom: 50px;
+  /* padding-bottom: 50px;
+  margin-bottom: 50px; */
   clear: both;
 }
 .section-heading.svg-sm-2 .svg {
@@ -252,7 +252,7 @@ h6 {
 }
 .section-heading.svg-sm .svg {
   height: 180px;
-  margin-bottom: -80px;
+  width: auto;
   padding: 0;
 }
 .section-heading.colored .svg {
@@ -315,6 +315,10 @@ h6 {
   }
 }
 
+.groom-bride-row {
+  padding-top: 7em;
+}
+
 .qbootstrap-bg {
   background: rgba(0, 0, 0, 0.03);
 }
@@ -325,12 +329,6 @@ h6 {
   height: 100vh;
   width: 100%;
 }
-@media screen and (max-width: 768px) {
-  .qbootstrap-cover,
-  .qbootstrap-hero {
-    height: 700px;
-  }
-}
 
 .qbootstrap-overlay {
   position: absolute !important;
@@ -340,7 +338,7 @@ h6 {
   bottom: 0;
   right: 0;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .qbootstrap-cover,
@@ -801,8 +799,9 @@ h6 {
   background: #fef6f8;
   z-index: -1;
 }
-.couple img {
+.couple .couple-img {
   width: 300px;
+  height: 300px;
   margin: 0 auto;
   margin-bottom: 40px;
   margin-top: -190px;
@@ -811,7 +810,32 @@ h6 {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
+
+.couple .couple-img img {
+  width: 200%;
+  height: 200%;
+  object-fit: cover;
+  max-width: unset;
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.couple.groom .couple-img img {
+  left: 38%;
+  top: 80%;
+}
+
+.couple.bride .couple-img img {
+  left: 54%;
+  top: 88%;
+}
+
 .couple .desc {
   z-index: 1;
 }
@@ -1061,7 +1085,6 @@ h6 {
   fill: #fff;
 }
 #qbootstrap-started .box-testimony {
-  margin-bottom: 2em;
   float: left;
 }
 #qbootstrap-started .box-testimony a {
@@ -1198,6 +1221,9 @@ h6 {
   .wedding-events {
     margin-bottom: 2em;
   }
+  .wedding-events:last-child {
+    margin-bottom: 0;
+  }
 }
 .wedding-events .ceremony-bg {
   background-size: cover;
@@ -1231,6 +1257,19 @@ h6 {
 .wedding-events .desc .date {
   display: block;
 }
+.wedding-events .desc .date .info-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .wedding-events .desc .date .info-text {
+    flex-direction: column;
+    gap: 0;
+  }
+}
 .wedding-events .desc .date span {
   display: block;
   font-size: 16px;
@@ -1240,14 +1279,13 @@ h6 {
   position: relative;
   width: 100%;
   float: left;
+  transform: translateY(-50%);
 }
 .wedding-events .desc .icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin-top: 60%;
+  position: relative;
+  margin: 0;
 }
+
 .wedding-events .desc .icon i {
   color: #fff;
   padding: 15px;
@@ -1256,12 +1294,6 @@ h6 {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   border-radius: 50%;
-}
-@media screen and (max-width: 768px) {
-  .wedding-events .desc .icon {
-    position: relative;
-    margin: 0;
-  }
 }
 
 #qbootstrap-started {
@@ -1313,8 +1345,8 @@ h6 {
   color: #fff;
   font-size: 16px !important;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
@@ -1349,7 +1381,7 @@ h6 {
 }
 #qbootstrap-started .form-inline .form-group {
   width: 100% !important;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
 }
 #qbootstrap-started .form-inline .form-group .form-control {
   width: 100%;
@@ -1495,7 +1527,7 @@ h6 {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  display: inline;
+  /* display: inline; */
   width: 25px;
   height: 3px;
   color: #722323;
@@ -1561,7 +1593,6 @@ h6 {
   top: 12px;
   right: 0px;
   z-index: 21;
-  padding: 6px 0 0 0;
   display: block;
   margin: 0 auto;
   display: none;
@@ -1601,8 +1632,11 @@ h6 {
 }
 
 #footer {
-  padding: 50px 0;
+  padding: 24px 0;
   color: #7f7f7f;
+}
+#footer h2 {
+  font-size: calc(6vw + 20px);
 }
 #footer .copyright {
   margin-bottom: 0px;
