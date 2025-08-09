@@ -343,7 +343,6 @@ h6 {
 
 .qbootstrap-cover,
 .video-hero {
-  background-position: center !important;
   background-size: cover;
   position: relative;
   background-repeat: no-repeat;

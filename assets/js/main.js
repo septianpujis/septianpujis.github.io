@@ -292,6 +292,226 @@
 	};
 
 
+	// Floating Music Player functionality
+	var floatingMusicPlayer = function () {
+		var musicPlayer = $('#floating-music-player');
+		var musicToggleBtn = $('#music-toggle-btn');
+		var musicIcon = $('#music-icon');
+		var backgroundMusic = $('#background-music')[0];
+		var isPlaying = false;
+		var hasInteracted = false;
+
+		// Function to play music
+		function playMusic() {
+			if (!backgroundMusic) return;
+
+			// Unmute the audio first
+			backgroundMusic.muted = false;
+
+			backgroundMusic.play().then(function () {
+				isPlaying = true;
+				musicToggleBtn.addClass('playing');
+				musicIcon.removeClass('fa-play').addClass('fa-pause');
+				console.log('Music started playing');
+			}).catch(function (error) {
+				console.log('Audio playback failed:', error);
+				isPlaying = false;
+				musicIcon.removeClass('fa-pause').addClass('fa-play');
+				// Show user-friendly message if autoplay fails
+				if (error.name === 'NotAllowedError') {
+					console.log('Autoplay blocked by browser. User needs to interact first.');
+				}
+			});
+		}
+
+		// Function to pause music
+		function pauseMusic() {
+			if (!backgroundMusic) return;
+
+			backgroundMusic.pause();
+			isPlaying = false;
+			musicToggleBtn.removeClass('playing');
+			musicIcon.removeClass('fa-pause').addClass('fa-play');
+			console.log('Music paused');
+		}
+
+		// Function to toggle music
+		function toggleMusic() {
+			console.log('Toggle music called, isPlaying:', isPlaying);
+			if (isPlaying) {
+				pauseMusic();
+			} else {
+				playMusic();
+			}
+		}
+
+		// Function to simulate user click
+		function simulateUserClick() {
+			if (!hasInteracted && !isPlaying && backgroundMusic) {
+				hasInteracted = true;
+				console.log('Simulating user click to start music');
+				// Use a small delay to ensure the audio context is ready
+				setTimeout(function () {
+					if (!isPlaying && backgroundMusic.readyState >= 1) {
+						toggleMusic();
+					}
+				}, 100);
+			}
+		}
+
+		// Event listener for music toggle button
+		musicToggleBtn.on('click', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('Music button clicked');
+			hasInteracted = true;
+			toggleMusic();
+		});
+
+		// Handle audio ended event
+		if (backgroundMusic) {
+			backgroundMusic.addEventListener('ended', function () {
+				// If loop is not working, restart the audio
+				if (isPlaying) {
+					backgroundMusic.currentTime = 0;
+					backgroundMusic.play();
+				}
+			});
+
+			// Handle audio error
+			backgroundMusic.addEventListener('error', function (e) {
+				console.log('Audio error:', e);
+				// Hide the player if audio file is not found
+				musicPlayer.hide();
+			});
+
+			// Handle audio canplay event
+			backgroundMusic.addEventListener('canplay', function () {
+				console.log('Audio can play');
+				// Try to simulate user click once audio is ready
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 1000);
+			});
+
+			// Handle audio loadstart event
+			backgroundMusic.addEventListener('loadstart', function () {
+				console.log('Audio loading started');
+			});
+
+			// Handle audio loadeddata event
+			backgroundMusic.addEventListener('loadeddata', function () {
+				console.log('Audio data loaded');
+				// Try to simulate user click once data is loaded
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 500);
+			});
+
+			// Handle loadedmetadata event
+			backgroundMusic.addEventListener('loadedmetadata', function () {
+				console.log('Audio metadata loaded');
+				// Try to simulate user click once metadata is loaded
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 800);
+			});
+
+			// Handle canplaythrough event (audio is fully loaded and can play)
+			backgroundMusic.addEventListener('canplaythrough', function () {
+				console.log('Audio can play through');
+				// Try to simulate user click immediately when audio can play through
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 200);
+			});
+		}
+
+		// Handle page visibility change (pause when page is hidden)
+		document.addEventListener('visibilitychange', function () {
+			if (document.hidden && isPlaying) {
+				pauseMusic();
+			}
+		});
+
+		// Initialize music player
+		$(document).ready(function () {
+			if (backgroundMusic) {
+				// Set volume to a reasonable level
+				backgroundMusic.volume = 0.5;
+
+				// Set initial icon to play (since autoplay is blocked)
+				musicIcon.removeClass('fa-pause fa-music').addClass('fa-play');
+
+				// Try to simulate user click after page loads
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 2000);
+
+				// Try again after a longer delay if still not playing
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 5000);
+
+				// Try one more time after 8 seconds
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 8000);
+			}
+		});
+
+		// Also try to simulate click when user interacts with the page
+		$(document).on('click touchstart keydown scroll', function () {
+			if (!hasInteracted && !isPlaying) {
+				hasInteracted = true;
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 100);
+			}
+		});
+
+		// Try to simulate click on window focus
+		$(window).on('focus', function () {
+			if (!hasInteracted && !isPlaying) {
+				hasInteracted = true;
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 100);
+			}
+		});
+
+		// Try to play when the page becomes visible
+		$(window).on('pageshow', function () {
+			if (!hasInteracted && !isPlaying) {
+				hasInteracted = true;
+				setTimeout(function () {
+					if (!isPlaying) {
+						simulateUserClick();
+					}
+				}, 100);
+			}
+		});
+	};
+
+
 	// Document on load.
 	$(function () {
 
@@ -305,6 +525,7 @@
 		contentWayPoint();
 		inlineSVG();
 		bgVideo();
+		floatingMusicPlayer();
 	});
 
 

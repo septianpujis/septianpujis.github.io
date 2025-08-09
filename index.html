@@ -32,10 +32,6 @@
 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="assets/css-files/animate.css" />
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="assets/fonts/icomoon.css" />
-	<!-- Simple Line Icons -->
-	<link rel="stylesheet" href="assets/fonts/simple-line-icons.css" />
 	<!-- Font Awesome CDN -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<!-- Owl Carousel -->
@@ -47,6 +43,9 @@
 	<link rel="stylesheet" href="assets/css-files/bootstrap.css" />
 
 	<link rel="stylesheet" href="assets/css-files/style.css" />
+
+	<!-- Music Player CSS -->
+	<link rel="stylesheet" href="assets/css-files/music-player.css" />
 
 	<!-- Modernizr JS -->
 	<script src="assets/js/modernizr-2.6.2.min.js"></script>
@@ -88,11 +87,11 @@
 
 	<div class="qbootstrap-hero" data-section="home">
 		<div class="qbootstrap-overlay"></div>
-		<div class="qbootstrap-cover text-center" data-stellar-background-ratio="0.5" style="background-image: url('assets/images/bg-img.jpeg'); background-position: center !important">
+		<div class="qbootstrap-cover text-center" style="background-image: url('assets/images/bg-img.jpeg'); background-size: cover; background-position: center;">
 			<div class="display-t">
 				<div class="display-tc">
 					<div class="container">
-						<div class="col-md-10 col-md-offset-1">
+						<div>
 							<div class="animate-box svg-sm colored fadeInUp animated">
 								<img src="assets/svg/svg-1.svg" alt="SVG 1" class="svg replaced-svg" />
 								<h1 class="holder"><span>The Wedding of</span></h1>
@@ -107,7 +106,7 @@
 			<div class="display-b" style="position: absolute; bottom: 50px; left: 0; right: 0; text-align: center; z-index: 5">
 				<div class="animate-box fadeInUp animated">
 					<div class="invitation-box display-tc" id="invitation-box">
-						<p style="margin: 0; letter-spacing: 2px;"><strong>To: </strong><span id="invitation-to">Guest</span></p>
+						<p style="margin: 0; letter-spacing: 2px;"><strong>To: </strong><span id="invitation-to"></span></p>
 					</div>
 					<div class="scroll-down-btn" style="margin-top: 20px">
 						<a href="#qbootstrap-couple" class="btn btn-primary btn-circle" style="
@@ -155,7 +154,7 @@
 		</div>
 	</div>
 
-	<div id="qbootstrap-countdown" data-stellar-background-ratio="0.75" style="background-image: url('assets/images/bg-img-2.jpeg'); background-position: 0px -143.95px" data-section="wedding-day">
+	<div id="qbootstrap-countdown" style="background-image: url('assets/images/bg-img-2.jpeg'); background-position: 0px 44%; background-size: cover" data-section="wedding-day">
 		<div class="overlay"></div>
 		<div class="display-over">
 			<div class="container">
@@ -372,7 +371,7 @@
 		</div>
 	</div>
 
-	<div id="qbootstrap-started" class="qbootstrap-bg" data-section="rsvp" style="background-image: url('assets/images/bg-img-3.jpeg'); background-position: center">
+	<div id="qbootstrap-started" class="qbootstrap-bg" data-section="rsvp" style="background-image: url('assets/images/bg-img-3.jpeg'); background-position: center; background-size: cover">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row animate-box fadeInUp animated">
@@ -546,7 +545,7 @@
 		});
 	</script>
 
-	<div id="qbootstrap-cta" data-section="cta">
+	<!-- <div id="qbootstrap-cta" data-section="cta">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -564,7 +563,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<div id="qbootstrap-gallery" data-section="gallery">
 		<div class="container">
@@ -588,10 +587,10 @@
 			<div class="row">
 				<div class="col-md-3 col-sm-6">
 					<div class="gallery animate-box fadeInUp animated">
-						<a class="gallery-img image-popup" href="assets/images/gallery-3.jpg"><img src="assets/images/gallery-10.jpg" class="img-responsive" alt="Image Gallery" /></a>
+						<a class="gallery-img image-popup" href="assets/images/gallery-1.jpg"><img src="assets/images/gallery-1.jpg" class="img-responsive" alt="Image Gallery" /></a>
 					</div>
 					<div class="gallery animate-box fadeInUp animated">
-						<a class="gallery-img image-popup" href="assets/images/gallery-1.jpg"><img src="assets/images/gallery-1.jpg" class="img-responsive" alt="Image Gallery" /></a>
+						<a class="gallery-img image-popup" href="assets/images/gallery-3.jpg"><img src="assets/images/gallery-3.jpg" class="img-responsive" alt="Image Gallery" /></a>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
@@ -610,7 +609,7 @@
 						<a class="gallery-img image-popup" href="assets/images/gallery-7.jpg"><img src="assets/images/gallery-7.jpg" class="img-responsive" alt="Image Gallery" /></a>
 					</div>
 					<div class="gallery animate-box fadeInUp animated">
-						<a class="gallery-img image-popup" href="assets/images/gallery-10.jpg"><img src="assets/images/gallery-3.jpg" class="img-responsive" alt="Image Gallery" /></a>
+						<a class="gallery-img image-popup" href="assets/images/gallery-10.jpg"><img src="assets/images/gallery-10.jpg" class="img-responsive" alt="Image Gallery" /></a>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
@@ -646,6 +645,19 @@
 			</div> -->
 		</div>
 	</footer>
+
+	<!-- Floating Music Player -->
+	<div id="floating-music-player" class="floating-music-player">
+		<button id="music-toggle-btn" class="music-toggle-btn" title="Click to start/stop background music">
+			<i id="music-icon" class="fa fa-play"></i>
+		</button>
+		<audio id="background-music" loop preload="auto">
+			<source src="assets/music/background-music.mp3" type="audio/mpeg">
+			<source src="assets/music/background-music.ogg" type="audio/ogg">
+			<source src="assets/music/background-music.wav" type="audio/wav">
+			Your browser does not support the audio element.
+		</audio>
+	</div>
 
 	<!-- jQuery -->
 	<script src="assets/js/jquery.min.js"></script>
