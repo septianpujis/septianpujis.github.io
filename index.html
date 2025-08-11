@@ -47,11 +47,72 @@
 	<!-- Music Player CSS -->
 	<link rel="stylesheet" href="assets/css-files/music-player.css" />
 
+	<!-- Loading Splash Screen Styles -->
+	<style>
+		.loading-splash {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #f4f4f4;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 9999;
+			transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+		}
+
+		.loading-splash.hidden {
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		.love-icon {
+			animation: pulse 1.5s ease-in-out infinite;
+		}
+
+		.love-icon i {
+			font-size: 80px;
+			color: #722323;
+		}
+
+		@keyframes pulse {
+			0% {
+				transform: scale(1);
+				opacity: 1;
+			}
+
+			50% {
+				transform: scale(1.2);
+				opacity: 0.8;
+			}
+
+			100% {
+				transform: scale(1);
+				opacity: 1;
+			}
+		}
+
+		/* Hide splash screen when page is loaded */
+		body.loaded .loading-splash {
+			opacity: 0;
+			visibility: hidden;
+		}
+	</style>
+
 	<!-- Modernizr JS -->
 	<script src="assets/js/modernizr-2.6.2.min.js"></script>
 </head>
 
 <body>
+	<!-- Loading Splash Screen -->
+	<div id="loading-splash" class="loading-splash">
+		<div class="love-icon">
+			<i class="fa fa-heart"></i>
+		</div>
+	</div>
+
 	<header role="banner" id="qbootstrap-header">
 		<div class="container">
 			<nav class="navbar navbar-default">
@@ -103,7 +164,7 @@
 				</div>
 			</div>
 			<!-- Bottom section for invitation recipient and scroll button -->
-			<div class="display-b" style="position: absolute; bottom: 50px; left: 0; right: 0; text-align: center; z-index: 5">
+			<div class="display-b" style="position: absolute; bottom: 0dvh; left: 0; right: 0; text-align: center; z-index: 5; transform: translateY(-50%)">
 				<div class="animate-box fadeInUp animated">
 					<div class="invitation-box display-tc" id="invitation-box" style="display: none">
 						<p style="margin: 0; letter-spacing: 2px"><strong>To: </strong><span id="invitation-to"></span></p>
@@ -265,8 +326,8 @@
 								<a href="https://maps.app.goo.gl/PbvNeQvwxznoj6ED8" target="_blank" class="btn btn-primary btn-sm btn-round" title="Google Maps">
 									<i class="fa fa-map-marker"></i>
 								</a>
-								<a href="https://www.instagram.com/liyayaa__" target="_blank" class="btn btn-secondary btn-sm btn-round" title="Live YouTube">
-									<i class="fa fa-youtube-play"></i>
+								<a href="https://www.instagram.com/liyayaa__" target="_blank" class="btn btn-secondary btn-sm btn-round" title="Live Instagram">
+									<i class="fa fa-instagram"></i>
 								</a>
 							</div>
 						</div>
@@ -301,8 +362,8 @@
 								<a href="https://maps.app.goo.gl/PbvNeQvwxznoj6ED8" target="_blank" class="btn btn-primary btn-sm btn-round" title="Google Maps">
 									<i class="fa fa-map-marker"></i>
 								</a>
-								<a href="https://www.instagram.com/liyayaa__" target="_blank" class="btn btn-secondary btn-sm btn-round" title="Live YouTube">
-									<i class="fa fa-youtube-play"></i>
+								<a href="https://www.instagram.com/liyayaa__" target="_blank" class="btn btn-secondary btn-sm btn-round" title="Live Instagram">
+									<i class="fa fa-instagram"></i>
 								</a>
 							</div>
 						</div>
@@ -403,7 +464,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-10 col-md-offset-1">
 					<div class="messages-container" style="max-height: 400px; overflow-y: auto; padding: 20px">
 						<div id="sweet-messages">
 							<!-- Messages will be loaded here dynamically -->
@@ -414,115 +475,15 @@
 		</div>
 	</div>
 
-	<!-- Mockup data for sweet messages -->
-	<script>
-		// Mockup data for sweet messages
-		const mockMessages = [
-			{
-				name: "Ahmad & Siti",
-				message: "Selamat menempuh hidup baru! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Doa kami menyertai kalian selalu.",
-				date: "2025-01-15",
-			},
-			{
-				name: "Budi Santoso",
-				message: "Congratulations! Wishing you both a lifetime of love, happiness, and beautiful memories together.",
-				date: "2025-01-14",
-			},
-			{
-				name: "Dewi & Rudi",
-				message: "Selamat menikah! Semoga pernikahan kalian membawa berkah dan kebahagiaan untuk keluarga besar.",
-				date: "2025-01-13",
-			},
-			{
-				name: "Maya Indah",
-				message: "Best wishes for your special day! May your love story be as beautiful as your wedding day.",
-				date: "2025-01-12",
-			},
-			{
-				name: "Pak Haji & Bu Hajjah",
-				message: "Assalamualaikum. Selamat menempuh hidup baru. Semoga menjadi keluarga yang diberkahi Allah SWT.",
-				date: "2025-01-11",
-			},
-			{
-				name: "Keluarga Besar",
-				message: "Selamat menikah! Semoga menjadi keluarga yang harmonis dan penuh kasih sayang.",
-				date: "2025-01-10",
-			},
-			{
-				name: "Teman Kantor",
-				message: "Congratulations on your wedding! Wishing you both a wonderful journey together.",
-				date: "2025-01-09",
-			},
-			{
-				name: "Tetangga",
-				message: "Selamat menikah! Semoga menjadi keluarga yang sakinah dan penuh berkah.",
-				date: "2025-01-08",
-			},
-		];
+	<!-- Firebase SDK -->
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
-		// Function to load sweet messages
-		function loadSweetMessages() {
-			const messagesContainer = document.getElementById("sweet-messages");
-			messagesContainer.innerHTML = "";
-
-			mockMessages.forEach((msg, index) => {
-				const messageDiv = document.createElement("div");
-				messageDiv.className = "box-testimony animate-box fadeInUp animated";
-				messageDiv.style.padding = "15px";
-
-				messageDiv.innerHTML = `
-					<blockquote>
-						<span class="quote"><span><i class="fa fa-quote-left"></i></span></span>
-						<p>"${msg.message}"</p>
-					</blockquote>
-					<p class="author">${msg.name}</p>
-				`;
-
-				messagesContainer.appendChild(messageDiv);
-			});
-		}
-
-		// Function to handle RSVP form submission
-		function handleRSVPSubmit(event) {
-			event.preventDefault();
-
-			const formData = {
-				name: document.getElementById("name").value,
-				message: document.getElementById("message").value,
-				attendance: document.getElementById("attendance").value,
-			};
-
-			// Placeholder API call
-			console.log("Sending RSVP data to API:", formData);
-
-			// Simulate API call
-			setTimeout(() => {
-				alert("Thank you for your RSVP! Your response has been recorded.");
-
-				// Add the new message to the mockup data
-				mockMessages.unshift({
-					name: formData.name,
-					message: formData.message,
-					date: new Date().toISOString().split("T")[0],
-				});
-
-				// Reload messages
-				loadSweetMessages();
-
-				// Reset form
-				document.getElementById("rsvp-form").reset();
-			}, 1000);
-		}
-
-		// Add event listener when DOM is loaded
-		document.addEventListener("DOMContentLoaded", function () {
-			// Load sweet messages
-			loadSweetMessages();
-
-			// Add form submit event listener
-			document.getElementById("rsvp-form").addEventListener("submit", handleRSVPSubmit);
-		});
-	</script>
+	<!-- RSVP JavaScript Files -->
+	<script src="assets/js/environment.js"></script>
+	<script src="assets/js/firebase-config.js"></script>
+	<script src="assets/js/rsvp.js"></script>
 
 	<div id="qbootstrap-press" data-section="press" style="background-color: #f4f4f4">
 		<div class="row animate-box fadeInUp animated">
@@ -538,7 +499,7 @@
 						<div class="col-sm-6 rekening-row">
 							<div class="couple groom text-center animate-box fadeInUp animated">
 								<div class="rekening-img">
-									<img src="assets/images/rekening-bca.webp" class="img-responsive" alt="Image Gallery" />
+									<img src="assets/images/rekening-bca.webp" class="img-responsive" alt="Image Gallery" style="width: 50%;" />
 								</div>
 								<div class="desc">
 									<h2 style="margin-bottom: 0; padding-bottom: 0;">8880385896</h2>
@@ -553,7 +514,7 @@
 						<div class="col-sm-6 rekening-row">
 							<div class="couple bride text-center animate-box fadeInUp animated">
 								<div class="rekening-img">
-									<img src="assets/images/rekening-mandiri.png" class="img-responsive" alt="Image Gallery" />
+									<img src="assets/images/rekening-mandiri.png" class="img-responsive" alt="Image Gallery" style="width:64%;" />
 								</div>
 								<div class="desc">
 									<h2 style="margin-bottom: 0; padding-bottom: 0;">1760002467361</h2>
@@ -721,6 +682,41 @@
 				});
 			}
 		});
+	</script>
+
+	<!-- Loading Splash Screen Script -->
+	<script>
+		// Hide loading splash screen when page is fully loaded
+		window.addEventListener('load', function () {
+			// Add a small delay for better user experience
+			setTimeout(function () {
+				document.body.classList.add('loaded');
+				document.getElementById('loading-splash').classList.add('hidden');
+
+				// Remove the splash screen from DOM after animation
+				setTimeout(function () {
+					const splash = document.getElementById('loading-splash');
+					if (splash) {
+						splash.remove();
+					}
+				}, 500);
+			}, 500);
+		});
+
+		// Fallback: Hide splash screen if load event doesn't fire within 5 seconds
+		setTimeout(function () {
+			if (document.getElementById('loading-splash')) {
+				document.body.classList.add('loaded');
+				document.getElementById('loading-splash').classList.add('hidden');
+
+				setTimeout(function () {
+					const splash = document.getElementById('loading-splash');
+					if (splash) {
+						splash.remove();
+					}
+				}, 500);
+			}
+		}, 5000);
 	</script>
 </body>
 

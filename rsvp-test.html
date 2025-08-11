@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP System Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .messages-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .message-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+
+        .message-author {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .message-date {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .test-info {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>RSVP System Test</h1>
+
+    <div class="test-info">
+        <h3>Test Information</h3>
+        <p>This is a test page to verify the RSVP system works independently. The system is currently using mock data since Firebase is not configured yet.</p>
+        <p><strong>Status:</strong> <span id="system-status">Loading...</span></p>
+    </div>
+
+    <div class="container">
+        <h2>RSVP Form</h2>
+        <form id="rsvp-form">
+            <div class="form-group">
+                <label for="name">Nama:</label>
+                <input type="text" id="name" placeholder="Masukkan nama Anda" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Pesan:</label>
+                <textarea id="message" rows="3" placeholder="Tulis pesan untuk kedua mempelai" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="attendance">Kehadiran:</label>
+                <select id="attendance" required>
+                    <option value="">Pilih kehadiran</option>
+                    <option value="attending">Hadir</option>
+                    <option value="not-attending">Tidak Hadir</option>
+                    <option value="not-sure">Tidak Pasti</option>
+                </select>
+            </div>
+
+            <button type="submit">Kirim RSVP</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Sweet Messages</h2>
+        <div class="messages-container">
+            <div id="sweet-messages">
+                <!-- Messages will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>System Controls</h2>
+        <button onclick="testRSVPManager()">Test RSVP Manager</button>
+        <button onclick="testFirebaseConfig()">Test Firebase Config</button>
+        <button onclick="testFirebaseConnection()">Test Firebase Connection</button>
+        <button onclick="clearMessages()">Clear Messages</button>
+        <button onclick="addTestMessage()">Add Test Message</button>
+        <button onclick="switchToProduction()">Switch to Production</button>
+        <button onclick="switchToDevelopment()">Switch to Development</button>
+        <button onclick="manualFirebaseInit()">Manual Firebase Init</button>
+        <button onclick="debugFirebase()">Debug Firebase</button>
+    </div>
+
+    <!-- Load Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <!-- Load RSVP JavaScript Files -->
+    <script src="assets/js/environment.js"></script>
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/rsvp.js"></script>
+
+    <script>
+        // Test functions
+        function testRSVPManager() {
+            if (window.rsvpManager) {
+                console.log('RSVP Manager is loaded:', window.rsvpManager);
+                alert('RSVP Manager is working! Check console for details.');
+            } else {
+                alert('RSVP Manager is not loaded!');
+            }
+        }
+
+        function testFirebaseConfig() {
+            if (window.FIREBASE_CONFIG) {
+                console.log('Firebase Config:', window.FIREBASE_CONFIG);
+                alert('Firebase Config is loaded! Check console for details.');
+            } else {
+                alert('Firebase Config is not loaded!');
+            }
+        }
+
+        function clearMessages() {
+            if (window.rsvpManager) {
+                window.rsvpManager.messages = [];
+                window.rsvpManager.loadSweetMessages();
+                alert('Messages cleared!');
+            }
+        }
+
+        function addTestMessage() {
+            if (window.rsvpManager) {
+                const testMessage = {
+                    name: "Test User",
+                    message: "This is a test message added at " + new Date().toLocaleString(),
+                    timestamp: new Date().toISOString(),
+                    id: "test-" + Date.now()
+                };
+                window.rsvpManager.messages.unshift(testMessage);
+                window.rsvpManager.loadSweetMessages();
+                alert('Test message added!');
+            }
+        }
+
+        async function testFirebaseConnection() {
+            if (window.rsvpManager) {
+                const status = window.rsvpManager.getFirebaseStatus();
+                console.log('Firebase Status:', status);
+
+                if (status.firebaseAvailable) {
+                    if (status.initialized && status.db) {
+                        // Test actual connection
+                        const connectionTest = await window.rsvpManager.testFirebaseConnection();
+                        if (connectionTest) {
+                            alert(`Firebase is fully connected!\n\nStatus:\n- Firebase SDK: Available\n- Initialized: ${status.initialized}\n- Database: ${status.db}\n- Auth: ${status.auth}\n\nConnection test: PASSED`);
+                        } else {
+                            alert(`Firebase SDK loaded but connection failed.\n\nStatus:\n- Firebase SDK: Available\n- Initialized: ${status.initialized}\n- Database: ${status.db}\n- Auth: ${status.auth}\n\nConnection test: FAILED\n\nCheck console for details.`);
+                        }
+                    } else {
+                        alert(`Firebase SDK loaded but not fully initialized.\n\nStatus:\n- Firebase SDK: Available\n- Initialized: ${status.initialized}\n- Database: ${status.db}\n- Auth: ${status.auth}\n\nCheck console for details.`);
+                    }
+                } else {
+                    alert(`Firebase SDK not available.\n\nStatus:\n- Firebase SDK: Not Available\n- Initialized: ${status.initialized}\n- Database: ${status.db}\n- Auth: ${status.auth}\n\nCheck console for details.`);
+                }
+            } else {
+                alert('RSVP Manager not loaded!');
+            }
+        }
+
+        function switchToProduction() {
+            if (window.switchEnvironment) {
+                const success = window.switchEnvironment('production');
+                if (success) {
+                    alert('Switched to production environment. Firebase will reconnect with production settings.');
+                    location.reload();
+                } else {
+                    alert('Failed to switch to production environment.');
+                }
+            } else {
+                alert('Environment switching not available!');
+            }
+        }
+
+        function switchToDevelopment() {
+            if (window.switchEnvironment) {
+                const success = window.switchEnvironment('development');
+                if (success) {
+                    alert('Switched to development environment. Firebase will reconnect with development settings.');
+                    location.reload();
+                } else {
+                    alert('Failed to switch to development environment.');
+                }
+            } else {
+                alert('Environment switching not available!');
+            }
+        }
+
+        function manualFirebaseInit() {
+            if (window.rsvpManager) {
+                alert('Attempting to manually initialize Firebase...');
+                window.rsvpManager.initializeFirebase().then(() => {
+                    alert('Manual Firebase initialization completed. Check console for details.');
+                }).catch(error => {
+                    alert('Manual Firebase initialization failed: ' + error.message);
+                });
+            } else {
+                alert('RSVP Manager not loaded!');
+            }
+        }
+
+        function debugFirebase() {
+            if (window.rsvpManager) {
+                window.rsvpManager.debugFirebaseLoading();
+                alert('Firebase debug info logged to console. Check console for details.');
+            } else {
+                alert('RSVP Manager not loaded!');
+            }
+        }
+
+        // Update system status
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(() => {
+                if (window.rsvpManager) {
+                    const status = window.rsvpManager.getFirebaseStatus();
+                    if (status.initialized && status.db) {
+                        document.getElementById('system-status').textContent = 'RSVP System Ready (Firebase Connected)';
+                        document.getElementById('system-status').style.color = 'green';
+                    } else if (status.initialized) {
+                        document.getElementById('system-status').textContent = 'RSVP System Ready (Firebase Partial)';
+                        document.getElementById('system-status').style.color = 'orange';
+                    } else {
+                        document.getElementById('system-status').textContent = 'RSVP System Ready (Mock Mode)';
+                        document.getElementById('system-status').style.color = 'blue';
+                    }
+                } else {
+                    document.getElementById('system-status').textContent = 'RSVP System Failed to Load';
+                    document.getElementById('system-status').style.color = 'red';
+                }
+            }, 2000); // Give Firebase more time to initialize
+        });
+    </script>
+</body>
+
+</html>
