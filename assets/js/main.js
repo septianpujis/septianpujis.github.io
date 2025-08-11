@@ -299,7 +299,6 @@
 		var musicIcon = $('#music-icon');
 		var backgroundMusic = $('#background-music')[0];
 		var isPlaying = false;
-		var hasInteracted = false;
 
 		// Function to play music
 		function playMusic() {
@@ -324,6 +323,9 @@
 			});
 		}
 
+		// Make playMusic function globally accessible
+		window.playMusic = playMusic;
+
 		// Function to pause music
 		function pauseMusic() {
 			if (!backgroundMusic) return;
@@ -345,26 +347,13 @@
 			}
 		}
 
-		// Function to simulate user click
-		function simulateUserClick() {
-			if (!hasInteracted && !isPlaying && backgroundMusic) {
-				hasInteracted = true;
-				console.log('Simulating user click to start music');
-				// Use a small delay to ensure the audio context is ready
-				setTimeout(function () {
-					if (!isPlaying && backgroundMusic.readyState >= 1) {
-						toggleMusic();
-					}
-				}, 100);
-			}
-		}
+
 
 		// Event listener for music toggle button
 		musicToggleBtn.on('click', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
 			console.log('Music button clicked');
-			hasInteracted = true;
 			toggleMusic();
 		});
 
@@ -388,12 +377,6 @@
 			// Handle audio canplay event
 			backgroundMusic.addEventListener('canplay', function () {
 				console.log('Audio can play');
-				// Try to simulate user click once audio is ready
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 1000);
 			});
 
 			// Handle audio loadstart event
@@ -404,34 +387,16 @@
 			// Handle audio loadeddata event
 			backgroundMusic.addEventListener('loadeddata', function () {
 				console.log('Audio data loaded');
-				// Try to simulate user click once data is loaded
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 500);
 			});
 
 			// Handle loadedmetadata event
 			backgroundMusic.addEventListener('loadedmetadata', function () {
 				console.log('Audio metadata loaded');
-				// Try to simulate user click once metadata is loaded
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 800);
 			});
 
 			// Handle canplaythrough event (audio is fully loaded and can play)
 			backgroundMusic.addEventListener('canplaythrough', function () {
 				console.log('Audio can play through');
-				// Try to simulate user click immediately when audio can play through
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 200);
 			});
 		}
 
@@ -451,64 +416,12 @@
 				// Set initial icon to play (since autoplay is blocked)
 				musicIcon.removeClass('fa-pause fa-music').addClass('fa-play');
 
-				// Try to simulate user click after page loads
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 2000);
-
-				// Try again after a longer delay if still not playing
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 5000);
-
-				// Try one more time after 8 seconds
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 8000);
+				// Don't auto-play music - wait for user interaction via scroll button
+				console.log('Music player initialized - waiting for user interaction');
 			}
 		});
 
-		// Also try to simulate click when user interacts with the page
-		$(document).on('click touchstart keydown scroll', function () {
-			if (!hasInteracted && !isPlaying) {
-				hasInteracted = true;
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 100);
-			}
-		});
-
-		// Try to simulate click on window focus
-		$(window).on('focus', function () {
-			if (!hasInteracted && !isPlaying) {
-				hasInteracted = true;
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 100);
-			}
-		});
-
-		// Try to play when the page becomes visible
-		$(window).on('pageshow', function () {
-			if (!hasInteracted && !isPlaying) {
-				hasInteracted = true;
-				setTimeout(function () {
-					if (!isPlaying) {
-						simulateUserClick();
-					}
-				}, 100);
-			}
-		});
+		// Remove automatic music playing - wait for user interaction via scroll button
 	};
 
 
