@@ -37,6 +37,7 @@ jobs:
           mkdir -p out
           # Copy all static files to the out directory
           cp -r index.html out/
+          cp -r ngunduh-mantu/index.html out/
           cp -r assets out/
           cp -r component out/
           cp -r public out/
