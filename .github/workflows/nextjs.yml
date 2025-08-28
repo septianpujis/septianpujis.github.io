@@ -35,16 +35,16 @@ jobs:
         run: |
           # Create the out directory
           mkdir -p out
-          # Copy all static files to the out directory
-          cp -r index.html out/
-          cp -r ngunduh-mantu/index.html out/
+          # Copy all static files and folders to the out directory, preserving structure
+          cp index.html out/
+          cp -r ngunduh-mantu out/
           cp -r assets out/
-          cp -r component out/
-          cp -r public out/
+          if [ -d component ]; then cp -r component out/; fi
+          if [ -d public ]; then cp -r public out/; fi
           # Copy any other static files that might be needed
-          cp -r *.css out/ 2>/dev/null || true
-          cp -r *.js out/ 2>/dev/null || true
-          cp -r *.json out/ 2>/dev/null || true
+          cp *.css out/ 2>/dev/null || true
+          cp *.js out/ 2>/dev/null || true
+          cp *.json out/ 2>/dev/null || true
           echo "Static site built successfully"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
