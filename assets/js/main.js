@@ -253,6 +253,7 @@
 
 	// Set the date we're counting down to
 	var countDownDate = new Date("Oct 05, 2025 09:00:00").getTime();
+	var countDownDate2 = new Date("Oct 11, 2025 11:00:00").getTime();
 
 	// Update the count down every 1 second
 	var x = setInterval(function () {
@@ -262,6 +263,7 @@
 
 		// Find the distance between now an the count down date
 		var distance = countDownDate - now;
+		var distance2 = countDownDate2 - now;
 
 		// Time calculations for days, hours, minutes and seconds
 		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -269,15 +271,34 @@
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+		// Time calculations for days, hours, minutes and seconds (Ngunduh Mantu)
+		var days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+		var hours2 = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes2 = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds2 = Math.floor((distance2 % (1000 * 60)) / 1000);
+
 		// Display the result in an element with id="demo"
 		// document.getElementById("demo").innerHTML = days + "Days " + hours + "Hours "
 		// + minutes + "Minutes " + seconds + "Seconds ";
 
 		// Display the result in an element with id="demo"
-		document.getElementById("days").innerHTML = days + " <small>days</small>";
-		document.getElementById("hours").innerHTML = hours + " <small>hours</small> ";
-		document.getElementById("minutes").innerHTML = minutes + " <small>minutes</small> ";
-		document.getElementById("seconds").innerHTML = seconds + " <small>seconds</small> ";
+		var elDays = document.getElementById("days");
+		if (elDays) elDays.innerHTML = days + " <small>days</small>";
+		var elHours = document.getElementById("hours");
+		if (elHours) elHours.innerHTML = hours + " <small>hours</small> ";
+		var elMinutes = document.getElementById("minutes");
+		if (elMinutes) elMinutes.innerHTML = minutes + " <small>minutes</small> ";
+		var elSeconds = document.getElementById("seconds");
+		if (elSeconds) elSeconds.innerHTML = seconds + " <small>seconds</small> ";
+
+		var elNgunduhDays = document.getElementById("ngunduh-mantu-days");
+		if (elNgunduhDays) elNgunduhDays.innerHTML = days2 + " <small>days</small>";
+		var elNgunduhHours = document.getElementById("ngunduh-mantu-hours");
+		if (elNgunduhHours) elNgunduhHours.innerHTML = hours2 + " <small>hours</small> ";
+		var elNgunduhMinutes = document.getElementById("ngunduh-mantu-minutes");
+		if (elNgunduhMinutes) elNgunduhMinutes.innerHTML = minutes2 + " <small>minutes</small> ";
+		var elNgunduhSeconds = document.getElementById("ngunduh-mantu-seconds");
+		if (elNgunduhSeconds) elNgunduhSeconds.innerHTML = seconds2 + " <small>seconds</small> ";
 
 		// If the count down is finished, write some text 
 		if (distance < 0) {
