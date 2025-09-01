@@ -550,8 +550,18 @@ h6 {
 #qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span {
   position: relative;
 }
-#qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span:before,
-#qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span:after {
+#qbootstrap-slider-hero
+  .flexslider
+  .slider-text
+  > .slider-text-inner
+  .holder
+  span:before,
+#qbootstrap-slider-hero
+  .flexslider
+  .slider-text
+  > .slider-text-inner
+  .holder
+  span:after {
   position: absolute;
   top: 49%;
   width: 100px;
@@ -559,10 +569,20 @@ h6 {
   background: #fff;
   content: "";
 }
-#qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span:before {
+#qbootstrap-slider-hero
+  .flexslider
+  .slider-text
+  > .slider-text-inner
+  .holder
+  span:before {
   left: -110px;
 }
-#qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span:after {
+#qbootstrap-slider-hero
+  .flexslider
+  .slider-text
+  > .slider-text-inner
+  .holder
+  span:after {
   right: -110px;
 }
 @media screen and (max-width: 768px) {
@@ -572,15 +592,35 @@ h6 {
   #qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span {
     position: relative;
   }
-  #qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span:before,
-  #qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span:after {
+  #qbootstrap-slider-hero
+    .flexslider
+    .slider-text
+    > .slider-text-inner
+    .holder
+    span:before,
+  #qbootstrap-slider-hero
+    .flexslider
+    .slider-text
+    > .slider-text-inner
+    .holder
+    span:after {
     width: 50px;
     height: 2px;
   }
-  #qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span:before {
+  #qbootstrap-slider-hero
+    .flexslider
+    .slider-text
+    > .slider-text-inner
+    .holder
+    span:before {
     left: -60px;
   }
-  #qbootstrap-slider-hero .flexslider .slider-text > .slider-text-inner .holder span:after {
+  #qbootstrap-slider-hero
+    .flexslider
+    .slider-text
+    > .slider-text-inner
+    .holder
+    span:after {
     right: -60px;
   }
 }
@@ -1579,7 +1619,10 @@ h6 {
   float: left;
   padding: 20px;
 }
-#qbootstrap-press .qbootstrap-press-item .qbootstrap-press-text .qbootstrap-press-title {
+#qbootstrap-press
+  .qbootstrap-press-item
+  .qbootstrap-press-text
+  .qbootstrap-press-title {
   margin: 0 0 20px 0;
   padding: 0 0 10px 0;
   font-weight: 400;
@@ -1841,6 +1884,27 @@ h6 {
   -ms-border-radius: 50%;
   border-radius: 50%;
 }
+.social.social-circle li .parent-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .social.social-circle li .parent-image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .social.social-circle li .parent-image {
+    width: 160px;
+    height: 160px;
+  }
+}
+
 .social li a:hover {
   background: #393e46 !important;
 }
