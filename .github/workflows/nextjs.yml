@@ -38,6 +38,7 @@ jobs:
           # Copy all static files and folders to the out directory, preserving structure
           cp index.html out/
           cp ngunduh-mantu.html out/
+          cp wedding-invitation.html out/
           cp -r assets out/
           if [ -d component ]; then cp -r component out/; fi
           if [ -d public ]; then cp -r public out/; fi
