@@ -11,11 +11,8 @@ service cloud.firestore {
       allow read, write: if true;
     }
     
-    // Allow anyone to read and write sweet messages
-    // Guests can leave messages for the couple
-    match /sweet_messages/{document} {
-      allow read, write: if true;
-    }
+    // Note: sweet_messages collection is no longer used
+    // All RSVP responses and messages are now stored in rsvp_responses collection
     
     // Optional: User management (if you want to add authentication later)
     match /users/{userId} {
@@ -48,12 +45,8 @@ service cloud.firestore {
       allow update, delete: if false; // No updates or deletions
     }
     
-    match /sweet_messages/{document} {
-      allow create: if request.time > resource.data.created_at + duration.value(1, 'h')
-                   && getCountFromTime('sweet_messages', request.time, duration.value(1, 'h')) < 3;
-      allow read: if true;
-      allow update, delete: if false;
-    }
+    // Note: sweet_messages collection is no longer used
+    // All RSVP responses and messages are now stored in rsvp_responses collection
     
     // Helper function for rate limiting (you'll need to implement this)
     function getCountFromTime(collection, time, duration) {

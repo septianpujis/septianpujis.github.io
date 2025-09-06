@@ -34,8 +34,7 @@ const AUTH_CONFIG = {
 const FIRESTORE_CONFIG = {
     // Collection names
     collections: {
-        rsvp: 'rsvp_responses',
-        messages: 'sweet_messages',
+        rsvp: 'rsvp_responses',  // Single collection for both RSVP responses and sweet messages
         users: 'users'
     },
 
@@ -44,10 +43,6 @@ const FIRESTORE_CONFIG = {
         rsvp: {
             read: true,  // Anyone can read RSVP responses
             write: true  // Anyone can write RSVP responses
-        },
-        messages: {
-            read: true,  // Anyone can read messages
-            write: true  // Anyone can write messages
         }
     }
 };

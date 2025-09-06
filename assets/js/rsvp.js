@@ -279,19 +279,11 @@ class RSVPManager {
      */
     async submitToFirebase(data) {
         try {
-            // Add to rsvp_responses collection
+            // Add to single rsvp_responses collection (unified for both RSVP and sweet messages)
             await this.db.collection('rsvp_responses').add({
                 name: data.name,
                 message: data.message,
                 attendance: data.attendance,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                created_at: new Date()
-            });
-
-            // Add to sweet_messages collection
-            await this.db.collection('sweet_messages').add({
-                name: data.name,
-                message: data.message,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 created_at: new Date()
             });
@@ -360,7 +352,7 @@ class RSVPManager {
      */
     async loadMessagesFromFirebase() {
         try {
-            const snapshot = await this.db.collection('sweet_messages')
+            const snapshot = await this.db.collection('rsvp_responses')
                 .orderBy('timestamp', 'desc')
                 .limit(20)
                 .get();
@@ -372,6 +364,7 @@ class RSVPManager {
                     id: doc.id,
                     name: data.name,
                     message: data.message,
+                    attendance: data.attendance, // Include attendance info for completeness
                     timestamp: data.timestamp ? data.timestamp.toDate().toISOString() : data.created_at,
                     date: data.created_at ? data.created_at.toDate().toISOString().split('T')[0] : null
                 });

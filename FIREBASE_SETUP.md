@@ -67,9 +67,10 @@ The RSVP manager will automatically use the configuration from `firebase-config.
 
 The system will automatically create these collections when the first RSVP is submitted:
 
-- `rsvp_responses` - Stores RSVP form submissions
-- `sweet_messages` - Stores guest messages
+- `rsvp_responses` - Stores RSVP form submissions and guest messages (unified collection)
 - `users` - Stores user information (if authentication is enabled)
+
+**Note:** The system now uses a single `rsvp_responses` collection for both RSVP data and sweet messages to improve efficiency and reduce storage costs.
 
 ## Step 6: Security Rules (Optional but Recommended)
 
@@ -79,13 +80,8 @@ In Firestore Database > Rules, you can set up security rules:
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow anyone to read and write RSVP responses
+    // Allow anyone to read and write RSVP responses (includes messages)
     match /rsvp_responses/{document} {
-      allow read, write: if true;
-    }
-
-    // Allow anyone to read and write sweet messages
-    match /sweet_messages/{document} {
       allow read, write: if true;
     }
 

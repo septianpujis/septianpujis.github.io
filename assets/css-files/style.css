@@ -1988,3 +1988,9 @@ h6 {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.messages-container #sweet-messages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
