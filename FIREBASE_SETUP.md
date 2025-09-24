@@ -130,10 +130,10 @@ To enable debug mode, open browser console and run:
 
 ```javascript
 // Check if RSVP manager is loaded
-console.log(window.rsvpManager);
+// Check RSVP Manager
 
 // Check Firebase configuration
-console.log(window.FIREBASE_CONFIG);
+// Check Firebase configuration
 
 // Test RSVP submission
 window.rsvpManager.handleRSVPSubmit({ preventDefault: () => {} });

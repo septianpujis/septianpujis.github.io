@@ -34,16 +34,16 @@ class RSVPManager {
         try {
             // Check if Firebase is already loaded
             if (typeof firebase === 'undefined') {
-                console.log('Firebase SDK not loaded, checking HTML scripts...');
+                // Firebase SDK not loaded, checking HTML scripts...
 
                 // Check if Firebase scripts are already in the HTML
                 const firebaseScripts = document.querySelectorAll('script[src*="firebasejs"]');
                 if (firebaseScripts.length > 0) {
-                    console.log('Firebase scripts found in HTML, waiting for them to load...');
+                    // Firebase scripts found in HTML, waiting for them to load...
                     // Wait for scripts to load
                     await this.waitForFirebaseScripts();
                 } else {
-                    console.log('No Firebase scripts in HTML, attempting to load dynamically...');
+                    // No Firebase scripts in HTML, attempting to load dynamically...
                     // Try to load Firebase SDK dynamically
                     await this.loadFirebaseSDK();
                 }
@@ -51,7 +51,7 @@ class RSVPManager {
 
             // Double-check Firebase is available
             if (typeof firebase === 'undefined') {
-                console.log('Firebase SDK still not available, checking for alternative loading...');
+                // Firebase SDK still not available, checking for alternative loading...
                 // Wait a bit more and check again
                 await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -60,7 +60,7 @@ class RSVPManager {
                 }
             }
 
-            console.log('Firebase SDK detected, initializing...');
+            // Firebase SDK detected, initializing...
 
             // Wait a bit more to ensure Firebase is fully loaded
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -68,7 +68,7 @@ class RSVPManager {
             // Initialize Firebase
             if (!firebase.apps.length) {
                 firebase.initializeApp(this.firebaseConfig);
-                console.log('Firebase app initialized');
+                // Firebase app initialized
             }
 
             // Initialize Firestore
@@ -76,13 +76,13 @@ class RSVPManager {
             this.auth = firebase.auth();
 
             this.isFirebaseInitialized = true;
-            console.log('Firebase initialized successfully');
+            // Firebase initialized successfully
 
             // Load existing messages from Firestore
             await this.loadMessagesFromFirebase();
 
         } catch (error) {
-            console.error('Firebase initialization error:', error);
+            // Firebase initialization error
             this.isFirebaseInitialized = false;
             // Fallback to mock data
             this.loadMockMessages();
@@ -100,12 +100,12 @@ class RSVPManager {
             const checkFirebase = () => {
                 attempts++;
                 if (typeof firebase !== 'undefined') {
-                    console.log('Firebase SDK detected after waiting');
+                    // Firebase SDK detected after waiting
                     resolve();
                 } else if (attempts < maxAttempts) {
                     setTimeout(checkFirebase, 100);
                 } else {
-                    console.log('Firebase SDK not detected after waiting, will try dynamic loading');
+                    // Firebase SDK not detected after waiting, will try dynamic loading
                     resolve();
                 }
             };
@@ -119,7 +119,7 @@ class RSVPManager {
      */
     async loadFirebaseSDK() {
         return new Promise((resolve, reject) => {
-            console.log('Loading Firebase SDK dynamically...');
+            // Loading Firebase SDK dynamically...
 
             // Try multiple Firebase SDK versions
             const firebaseVersions = [
@@ -139,12 +139,12 @@ class RSVPManager {
                 const appScript = document.createElement('script');
                 appScript.src = firebaseVersions[currentVersion];
                 appScript.onload = () => {
-                    console.log(`Firebase App ${firebaseVersions[currentVersion]} loaded successfully`);
+                    // Firebase App loaded successfully
                     // Load Firestore
                     this.loadFirestore(currentVersion, resolve, reject);
                 };
                 appScript.onerror = () => {
-                    console.log(`Firebase App ${firebaseVersions[currentVersion]} failed, trying next version...`);
+                    // Firebase App failed, trying next version...
                     currentVersion++;
                     tryLoadFirebase();
                 };
@@ -168,12 +168,12 @@ class RSVPManager {
         const firestoreScript = document.createElement('script');
         firestoreScript.src = firestoreVersions[versionIndex];
         firestoreScript.onload = () => {
-            console.log(`Firestore ${firestoreVersions[versionIndex]} loaded successfully`);
+            // Firestore loaded successfully
             // Load Auth (optional)
             this.loadAuth(versionIndex, resolve, reject);
         };
         firestoreScript.onerror = () => {
-            console.log(`Firestore ${firestoreVersions[versionIndex]} failed, but continuing...`);
+            // Firestore failed, but continuing...
             // Continue even if auth fails
             this.loadAuth(versionIndex, resolve, reject);
         };
@@ -193,11 +193,11 @@ class RSVPManager {
         const authScript = document.createElement('script');
         authScript.src = authVersions[versionIndex];
         authScript.onload = () => {
-            console.log(`Firebase Auth ${authVersions[versionIndex]} loaded successfully`);
+            // Firebase Auth loaded successfully
             resolve();
         };
         authScript.onerror = () => {
-            console.log(`Firebase Auth ${authVersions[versionIndex]} failed, but continuing...`);
+            // Firebase Auth failed, but continuing...
             resolve(); // Continue even if auth fails
         };
         document.head.appendChild(authScript);
@@ -248,7 +248,7 @@ class RSVPManager {
             this.handleSubmissionSuccess(formData);
 
         } catch (error) {
-            console.error('RSVP submission error:', error);
+            // RSVP submission error
             this.showError('Terjadi kesalahan saat mengirim RSVP. Silakan coba lagi.');
         } finally {
             this.showLoadingState(false);
@@ -288,10 +288,10 @@ class RSVPManager {
                 created_at: new Date()
             });
 
-            console.log('Data submitted to Firebase successfully:', data);
+            // Data submitted to Firebase successfully
 
         } catch (error) {
-            console.error('Firebase submission error:', error);
+            // Firebase submission error
             throw new Error('Failed to submit to Firebase: ' + error.message);
         }
     }
@@ -302,7 +302,7 @@ class RSVPManager {
     async submitMock(data) {
         return new Promise((resolve) => {
             setTimeout(() => {
-                console.log('Mock submission (Firebase not available):', data);
+                // Mock submission (Firebase not available)
                 resolve();
             }, 1000);
         });
@@ -341,7 +341,7 @@ class RSVPManager {
                 this.loadMockMessages();
             }
         } catch (error) {
-            console.error('Error loading messages:', error);
+            // Error loading messages
             // Fallback to mock data
             this.loadMockMessages();
         }
@@ -371,10 +371,10 @@ class RSVPManager {
             });
 
             this.displayMessages();
-            console.log('Messages loaded from Firebase:', this.messages.length);
+            // Messages loaded from Firebase
 
         } catch (error) {
-            console.error('Error loading messages from Firebase:', error);
+            // Error loading messages from Firebase
             // Fallback to mock data
             this.loadMockMessages();
         }
@@ -386,7 +386,7 @@ class RSVPManager {
     loadMockMessages() {
         this.messages = this.getMockMessages();
         this.displayMessages();
-        console.log('Using mock messages (Firebase not available)');
+        // Using mock messages (Firebase not available)
     }
 
     /**
@@ -616,11 +616,11 @@ class RSVPManager {
 
             // Try to read from a test collection
             const testDoc = await this.db.collection('_test_connection').doc('test').get();
-            console.log('Firebase connection test successful');
+            // Firebase connection test successful
             return true;
 
         } catch (error) {
-            console.error('Firebase connection test failed:', error);
+            // Firebase connection test failed
             return false;
         }
     }
@@ -629,17 +629,17 @@ class RSVPManager {
      * Debug Firebase loading status
      */
     debugFirebaseLoading() {
-        console.log('=== Firebase Loading Debug ===');
-        console.log('Firebase global:', typeof firebase);
-        console.log('Firebase scripts in HTML:', document.querySelectorAll('script[src*="firebasejs"]').length);
+        // Firebase Loading Debug
+        // Firebase global status
+        // Firebase scripts in HTML
 
         const firebaseScripts = document.querySelectorAll('script[src*="firebasejs"]');
         firebaseScripts.forEach((script, index) => {
-            console.log(`Script ${index + 1}:`, script.src, 'Loaded:', script.complete);
+            // Script status
         });
 
-        console.log('Window firebase object:', window.firebase);
-        console.log('================================');
+        // Window firebase object
+        // Debug complete
     }
 
     /**

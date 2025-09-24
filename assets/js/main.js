@@ -332,14 +332,14 @@
 				isPlaying = true;
 				musicToggleBtn.addClass('playing');
 				musicIcon.removeClass('fa-play').addClass('fa-pause');
-				console.log('Music started playing');
+				// Music started playing
 			}).catch(function (error) {
-				console.log('Audio playback failed:', error);
+				// Audio playback failed
 				isPlaying = false;
 				musicIcon.removeClass('fa-pause').addClass('fa-play');
 				// Show user-friendly message if autoplay fails
 				if (error.name === 'NotAllowedError') {
-					console.log('Autoplay blocked by browser. User needs to interact first.');
+					// Autoplay blocked by browser. User needs to interact first.
 				}
 			});
 		}
@@ -355,12 +355,12 @@
 			isPlaying = false;
 			musicToggleBtn.removeClass('playing');
 			musicIcon.removeClass('fa-pause').addClass('fa-play');
-			console.log('Music paused');
+			// Music paused
 		}
 
 		// Function to toggle music
 		function toggleMusic() {
-			console.log('Toggle music called, isPlaying:', isPlaying);
+			// Toggle music called
 			if (isPlaying) {
 				pauseMusic();
 			} else {
@@ -374,7 +374,7 @@
 		musicToggleBtn.on('click', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
-			console.log('Music button clicked');
+			// Music button clicked
 			toggleMusic();
 		});
 
@@ -390,34 +390,34 @@
 
 			// Handle audio error
 			backgroundMusic.addEventListener('error', function (e) {
-				console.log('Audio error:', e);
+				// Audio error
 				// Hide the player if audio file is not found
 				musicPlayer.hide();
 			});
 
 			// Handle audio canplay event
 			backgroundMusic.addEventListener('canplay', function () {
-				console.log('Audio can play');
+				// Audio can play
 			});
 
 			// Handle audio loadstart event
 			backgroundMusic.addEventListener('loadstart', function () {
-				console.log('Audio loading started');
+				// Audio loading started
 			});
 
 			// Handle audio loadeddata event
 			backgroundMusic.addEventListener('loadeddata', function () {
-				console.log('Audio data loaded');
+				// Audio data loaded
 			});
 
 			// Handle loadedmetadata event
 			backgroundMusic.addEventListener('loadedmetadata', function () {
-				console.log('Audio metadata loaded');
+				// Audio metadata loaded
 			});
 
 			// Handle canplaythrough event (audio is fully loaded and can play)
 			backgroundMusic.addEventListener('canplaythrough', function () {
-				console.log('Audio can play through');
+				// Audio can play through
 			});
 		}
 
@@ -438,7 +438,7 @@
 				musicIcon.removeClass('fa-pause fa-music').addClass('fa-play');
 
 				// Don't auto-play music - wait for user interaction via scroll button
-				console.log('Music player initialized - waiting for user interaction');
+				// Music player initialized - waiting for user interaction
 			}
 		});
 

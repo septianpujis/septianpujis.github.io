@@ -81,7 +81,7 @@ function getApiConfig() {
 function switchEnvironment(env) {
     if (ENVIRONMENT[env]) {
         ENVIRONMENT.current = env;
-        console.log(`Switched to ${env} environment`);
+        // Environment switched
 
         // Update Firebase config if RSVP manager exists
         if (window.rsvpManager) {
@@ -90,16 +90,9 @@ function switchEnvironment(env) {
 
         return true;
     } else {
-        console.error(`Environment '${env}' not found`);
+        // Environment not found
         return false;
     }
-}
-
-// Log current environment info
-function logEnvironmentInfo() {
-    const config = getCurrentConfig();
-    console.log(`Current Environment: ${ENVIRONMENT.current}`);
-    console.log('Environment Config:', config);
 }
 
 // Export for module usage
@@ -127,7 +120,7 @@ if (typeof module !== 'undefined' && module.exports) {
 
     // Auto-log environment info in development
     if (ENVIRONMENT.current === 'development') {
-        console.log('Environment module loaded');
+        // Environment module loaded
         logEnvironmentInfo();
     }
 }
