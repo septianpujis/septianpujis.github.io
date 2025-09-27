@@ -354,7 +354,7 @@ class RSVPManager {
         try {
             const snapshot = await this.db.collection('rsvp_responses')
                 .orderBy('timestamp', 'desc')
-                .limit(20)
+                .limit(2000)
                 .get();
 
             this.messages = [];
