@@ -278,10 +278,6 @@
 		var seconds2 = Math.floor((distance2 % (1000 * 60)) / 1000);
 
 		// Display the result in an element with id="demo"
-		// document.getElementById("demo").innerHTML = days + "Days " + hours + "Hours "
-		// + minutes + "Minutes " + seconds + "Seconds ";
-
-		// Display the result in an element with id="demo"
 		var elDays = document.getElementById("days");
 		if (elDays) elDays.innerHTML = days + " <small>days</small>";
 		var elHours = document.getElementById("hours");
@@ -303,7 +299,7 @@
 		// If the count down is finished, write some text 
 		if (distance < 0) {
 			clearInterval(x);
-			document.getElementById("demo").innerHTML = "The Wedding Ceremony is Over";
+			document.getElementById("countdown").innerHTML = "";
 		}
 	}, 1000);
 
